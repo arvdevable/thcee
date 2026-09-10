@@ -7,7 +7,6 @@ flo         float   | function value type
 int         integer | function value type
 str         string  | function value type
 
-fget        get function from other file, must have "as" for alias, e.g. `fget filr:foo as bar;`
 mov         copy value
 sto         initialize/store
 lod         load another file / import / module load 
@@ -50,6 +49,25 @@ g           global [all the things made will automatically be private unless the
     val[p]      value of cell at pointer position
     run[p]      run pointer code
     rem[p]      remove pointer
+
+------ v2 ------
+
+fget        get function from other file, must have "as" for alias, e.g. `fget filr:foo as bar;`
+rax
+rbx
+rsp
+rip
+cla         class
+
+mdf __config__ {} to modify general configurations set in order to run thc. here, we have the allowlist of files and max memory in v2. must be on top of files. example:
+
+mdf __config__ {
+    allowlist = [
+        "file1.thc",
+        "file2.thc",
+    ],
+    maxmem = 25565,
+}
 
 notes:
     * whether a function is `global` or `private` is based on what's the allowlist on the file.
