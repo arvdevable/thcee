@@ -1,0 +1,56 @@
+boolean     function value type
+string      function value type
+float       function value type
+integer     function value type
+bool        boolean | function value type
+flo         float   | function value type
+int         integer | function value type
+str         string  | function value type
+
+fget        get function from other file, must have "as" for alias, e.g. `fget filr:foo as bar;`
+mov         copy value
+sto         initialize/store
+lod         load another file / import / module load 
+add         add
+sub         subtract
+mul         multiply
+div         divide
+xor         exclusive or
+cal         call
+ret         return
+mdf         modify (if it was used/defined before)
+mod         modulo 
+fgt         forget what's already lod/sto'd / delete / clean
+ext         clean and exit, to forget all stuff
+run         run another file or other file's functions, have to lod it first
+mem         memorize, all memory is private unless `g mem value`
+exp         export
+err         error output
+pm          pointer movement
+prb         pointer remember
+eq          equal
+lt          less-than
+gt          greater-than
+nr          not required
+if          conditional branch
+or          or
+g           global [all the things made will automatically be private unless there's g]
+*           comment
+** **       multi-line comment
+""          unnamed
+''          unnamed
+!           is not
+;           endline
+:           unnamed | function value type
+::          function value 
+
+[p]         pointer
+    new[p]      new pointer
+    pos[p]      get pointer position
+    val[p]      value of cell at pointer position
+    run[p]      run pointer code
+    rem[p]      remove pointer
+
+notes:
+    * whether a function is `global` or `private` is based on what's the allowlist on the file.
+    * `run` can be runnning another file, or running a function, but you can not use run. like `foo;` would run the `def foo{}`

@@ -1,1 +1,82 @@
-def
+* basic.thc
+* lang: thcee
+* im tryna make smth that's low-level and high-level and try not to half ass it 
+* but now it's a whole ass now. anyways, here's my attempt of two counter mach-
+* ine interpretation on thcee, my own language (hopefully). 
+
+sto c1 4;
+sto c2 4;
+
+prt c1;
+prt c2;
+
+results = add c1 c2;
+prt results;
+
+def cmiadd {
+    add c1 1;
+}
+
+def cmisub {
+    sub c2 1;
+}
+
+def cmiaddloop {
+    cmiadd;
+
+    if c1 eq 10 {
+        prt c1;
+        prt "add done";
+        ret;
+    };
+
+    cmiaddloop;
+}
+
+def cmisubloop {
+    cmisub;
+
+    if c2 eq 0 {
+        prt c2;
+        prt "sub done";
+        ret;
+    };
+
+    cmisubloop;
+}
+
+def count {
+    cmiaddloop;
+    cmisubloop;
+}
+
+count;
+
+final = add c1 c2;
+prt final;
+
+prt "all done.";
+
+******************************
+Minsky-style register machine
+asked by claude so yuh im doing it
+******************************
+
+sto r1 2;
+sto r2 0;
+
+def mrm_transfer {
+    if r1 eq 0 {
+        ret;
+    };
+
+    sub r1 1;
+    add r2 1;
+
+    mrm_transfer;
+}
+
+mrm_transfer;
+
+prt r1;
+prt r2;

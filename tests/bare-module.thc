@@ -1,0 +1,6 @@
+* Bare .thc paths are accepted as module sources.
+filr = tests/module.thc;
+lod filr;
+run filr;
+prt filr:answer;
+

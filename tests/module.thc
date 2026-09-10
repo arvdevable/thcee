@@ -1,0 +1,6 @@
+g def public_fn {
+    prt "module function";
+}
+
+answer = 42;
+exp answer;

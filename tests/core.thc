@@ -1,0 +1,46 @@
+* Core interpreter conformance program.
+sto x 7;
+mdf x 9;
+mov x copied;
+prt copied;
+
+sum = add x 3;
+prt sum;
+add x 1;
+prt x;
+prt div 7 2;
+prt div 7.0 2;
+prt xor true false;
+
+def recurse {
+    if x eq 10 {
+        ret;
+    }
+    add x 1;
+    recurse;
+}
+recurse;
+prt x;
+
+mem cells new[p] 2;
+prb [p] 5;
+add [p] 2;
+prt val[p];
+pm [p] 1;
+prb 9;
+prt pos[p];
+prt val[p];
+
+if missing eq 0 nr {
+    prt "unreachable";
+}
+prt "continued";
+
+sto module_file "tests/module.thc";
+lod module_file;
+run module_file;
+cal module_file:public_fn;
+fget module_file:public_fn as local_fn;
+local_fn;
+prt module_file:answer;
+
