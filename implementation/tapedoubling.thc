@@ -1,0 +1,65 @@
+
+* fibonacci via recursion, state carried on shared variables
+* since calls take no arguments in this build
+
+sto a 0;
+sto b 1;
+sto n 0;
+sto target 120;
+
+def step {
+    if eq n target {
+        prt a;
+        ret;
+    };
+
+    next = add a b;
+    mdf a b;
+    mdf b next;
+    mdf n add n 1;
+
+    step;
+}
+
+step;
+
+* first 12 triangular numbers, written to a pointer tape and read back
+* one spare cell (13, not 12) because the write loop's last pointer
+* move lands one past the last thing it wrote
+
+mem tape new[cursor] 13;
+
+sto sum 0;
+sto i 0;
+
+def fill {
+    if eq i 12 {
+        ret;
+    };
+
+    mdf sum add sum i;
+    prb [cursor] sum;
+    pm [cursor] 1;
+    mdf i add i 1;
+
+    fill;
+}
+
+fill;
+pm [cursor] -12;
+
+sto j 0;
+
+def readBack {
+    if eq j 12 {
+        ret;
+    };
+
+    prt val[cursor];
+    pm [cursor] 1;
+    mdf j add j 1;
+
+    readBack;
+}
+
+readBack;

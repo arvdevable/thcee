@@ -1,0 +1,48 @@
+* interpretation of the new shape of thc, main.thc
+
+cls _private {
+    sto r4 5;
+    sto r5 0;
+    sto printifpriv "you can access our private content!";
+
+cls minsky {
+    sto r1 2;
+    sto r2 0;
+
+    def mrm_transfer {
+        if r1 eq 0 {
+            ret;
+        };
+
+        sub r1 1;
+        add r2 1;
+
+        mrm_transfer;
+    }
+
+    def useprivate nf {
+        if r4 undefined or r5 undefined {
+            ret;
+        };
+
+        prt printifpriv;
+
+        if r4 eq 0 {
+            ret;
+        };
+
+        sub r4 1;
+        add r5 1;
+
+        useprivate;
+    }
+
+    mrm_transfer;
+
+    prt r1;
+    prt r2;
+}
+
+run minsky;
+
+* main.cnf.thc

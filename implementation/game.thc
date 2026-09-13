@@ -1,0 +1,73 @@
+* THCEE RPG: THE DARK ROOM
+
+sto player "Lumi";
+sto hp 30;
+sto enemy_hp 20;
+sto damage 7;
+sto potions 2;
+
+* 1 = attack
+* 2 = potion
+* 3 = flee
+sto choice 1;
+
+prt "============================";
+prt "       THE DARK ROOM";
+prt "============================";
+prt "You wake up in a dark room.";
+prt "Something is watching you.";
+prt " ";
+prt "1 = Attack";
+prt "2 = Drink potion";
+prt "3 = Flee";
+prt " ";
+
+if choice eq 1 {
+    prt "You attack the creature!";
+    sub enemy_hp damage;
+    prt "You dealt 7 damage.";
+};
+
+if choice eq 2 {
+    if potions gt 0 {
+        add hp 10;
+        sub potions 1;
+        prt "You drink a potion.";
+        prt "You recover 10 HP.";
+    } oth {
+        prt "You have no potions!";
+    }
+};
+
+if choice eq 3 {
+    prt "You run toward the door.";
+    prt "The creature lets you go.";
+    prt "YOU ESCAPED.";
+    ext;
+};
+
+prt " ";
+
+if enemy_hp gt 0 {
+    prt "The creature attacks!";
+    sub hp 5;
+    prt "You lost 5 HP.";
+} oth {
+    prt "The creature collapses.";
+    prt "YOU WIN!";
+    ext;
+};
+
+prt " ";
+
+if hp gt 0 {
+    prt "You are still alive.";
+    prt "HP:";
+    prt hp;
+    prt "Enemy HP:";
+    prt enemy_hp;
+} oth {
+    prt "You collapse.";
+    prt "GAME OVER.";
+    ext;
+};

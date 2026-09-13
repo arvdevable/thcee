@@ -9,7 +9,7 @@ str         string  | function value type
 
 mov         copy value
 sto         initialize/store
-lod         load another file / import / module load 
+lod         load another file / import / module load
 add         add
 sub         subtract
 mul         multiply
@@ -18,7 +18,7 @@ xor         exclusive or
 cal         call
 ret         return
 mdf         modify (if it was used/defined before)
-mod         modulo 
+mod         modulo
 fgt         forget what's already lod/sto'd / delete / clean
 ext         clean and exit, to forget all stuff
 run         run another file or other file's functions, have to lod it first
@@ -41,7 +41,7 @@ g           global [all the things made will automatically be private unless the
 !           is not
 ;           endline
 :           unnamed | function value type
-::          function value 
+::          function value
 
 [p]         pointer
     new[p]      new pointer
@@ -53,22 +53,53 @@ g           global [all the things made will automatically be private unless the
 ------ v2 ------
 
 fget        get function from other file, must have "as" for alias, e.g. `fget filr:foo as bar;`
-rax
-rbx
-rsp
-rip
-cla         class
+cls         class
+nok         not ok, "return false", example: prt nok;
+mtc         match/extract
+inp         input
+rx          regex
+ok          "return true", eexample: prt ok;
+as          call something as alias
+cls         execution-unit/class
+brn         branch/create execution context
+wai         wait for execution
+awt         await result
+get         retrieve value/state
+syn         synchronize
+frz         snapshot
+pse         pause scheduling
+unl         unlink
+ter         terminate
+mrg         join/merge contexts
 
-mdf __config__ {} to modify general configurations set in order to run thc. here, we have the allowlist of files and max memory in v2. must be on top of files. example:
+--- todo v2 ---
+remove `run` because it's unnecessary and will confuse people with branch
+
+mdf __config__ {} to modify general configurations set in order to run thc. here, we have the allowlist of files and max memory in v2. must be on main.cnf.thc. example:
 
 mdf __config__ {
-    allowlist = [
-        "file1.thc",
-        "file2.thc",
-    ],
-    maxmem = 25565,
+    main.thc {
+        allowlist = [           * can read these files
+            "file1.thc",
+            "file2.thc",
+        ],
+    },
+
+    * if there's a config that's outside of file.thc {} block, it'll be considered global.
+    format = * version
+    root = "./",                * absolute root for file mentions
+    maxmem = 25565,             * max memory allocated when running this project's codebase.
+
+    * if they want to use http and more
+    default_port= 25565,
 }
 
 notes:
     * whether a function is `global` or `private` is based on what's the allowlist on the file.
     * `run` can be runnning another file, or running a function, but you can not use run. like `foo;` would run the `def foo{}`
+    * make a folder named .thc that'll store the configurations for you, and main.cnf.thc is stored under /.thc/main.cnf.thc
+    * make `thc.exe init` for autogenerating the config files, like using what version, etc.
+
+concept:
+run branch, make the classes first, then run it with branch. dont forget abt race handler btw
+in my logic (this can be wrong) there's should be parallel works thus we should have await, wait, sync, get from other parallel, parallel class/authority, pause, freeze, unlink, term, join (join a/b means shares a and b's values and use just one lane) and more
